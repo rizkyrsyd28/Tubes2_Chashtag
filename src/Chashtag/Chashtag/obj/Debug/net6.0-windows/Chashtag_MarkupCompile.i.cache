@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 D:\Tugas Besar\Tubes2_Chashtag\src\Chashtag\Chashtag\App.xaml
-11407045341
+61063493277
 
-5868890821
+10534704717
 194101785492
-MainWindow.xaml;
+MainWindow.xaml;Views\MainGrid.xaml;Views\MainGrids\CanvasGrid.xaml;Views\MainGrids\ResultGrid.xaml;Views\SideGrid.xaml;Views\ViewBase.xaml;
 
-False
+True
 
