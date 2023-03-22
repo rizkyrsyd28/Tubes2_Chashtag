@@ -8,7 +8,71 @@
              d:DesignHeight="720" d:DesignWidth="270">
     <Grid>
         <Border CornerRadius="20" Margin="10" Background="#24283b">
-            
+            <Grid VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Title -->
+                <Grid Grid.Row="0">
+                    <TextBlock Text="CHashtag" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" Margin="0" Foreground="AliceBlue" FontWeight="ExtraBold" FontSize="40"/>
+                </Grid>
+                
+                <!-- Input File -->
+                <Grid Grid.Row="1" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- Button Input -->
+                    <Grid Grid.Column="0">
+                        <Button x:Name="input_file" Content="Input File" Height="40" Width="90" FontSize="15" Margin="25 5 5 5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="AliceBlue"/>
+                    </Grid>
+                    <!-- Text File -->
+                    <Grid Grid.Column="1">
+                        <TextBlock x:Name="file_name" Foreground="AliceBlue" Text="FILEEEEEEEEEEE"  FontSize="19" VerticalAlignment="Center" Margin="5 5 15 5" Height="30" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/>
+                        <!--<TextBlock x:Name="FileName" Text="{Binding FileName}"  FontSize="19" VerticalAlignment="Center" Margin="5 5 15 5" Height="30" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/>-->
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Margin="0 0 0 0 " x:Name="label_algoritma" Text="Algoritma" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="SemiBold"/>
+                    <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center">
+                        <RadioButton x:Name="bfs" Content="BFS" Foreground="AliceBlue" FontSize="20" Margin="0 10 0 10"/>
+                        <RadioButton x:Name="dfs" Content="DFS" Foreground="AliceBlue" FontSize="20" Margin="0 0 0 10"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="3" HorizontalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" x:Name="time_delay" Text="Time Delay" Foreground="AliceBlue" Margin="0 0 0 10"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Slider Grid.Column="0" x:Name="mySliders" Minimum="0" Maximum="100" Value="1" Width="180" Height="30" TickFrequency="1" TickPlacement="None" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="1" Foreground="AliceBlue" Text="{Binding Value, ElementName=mySliders, StringFormat={}{0:0}}" VerticalAlignment="Top" FontSize="15"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="4">
+                    <Button x:Name="start_file" Content="Find Treasure !" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Background="AliceBlue" FontSize="15" Width="120"/>
+                </Grid>
+                <Grid Grid.Row="5">
+                    <Button x:Name="visual" Content="Visualize" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Background="AliceBlue" FontSize="15" Width="100"/>
+                </Grid>
+            </Grid>
         </Border>
     </Grid>
 </UserControl>
