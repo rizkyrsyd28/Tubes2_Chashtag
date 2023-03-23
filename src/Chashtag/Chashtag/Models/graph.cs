@@ -7,17 +7,18 @@ namespace stima2
 {
     public class GraphNode
     {
-        public bool visited;
-        public bool treasure;
-        public bool start;
-        public int x_kor;
-        public int y_kor;
-        public string name;
-        public GraphNode? up;
-        public GraphNode? down;
-        public GraphNode? left;
-        public GraphNode? right;
-        public List<Tuple<int, int, string>> path;
+        // attribute
+        private bool visited;
+        private bool treasure;
+        private bool start;
+        private int x_kor;
+        private int y_kor;
+        private string name;
+        private GraphNode? up;
+        private GraphNode? down;
+        private GraphNode? left;
+        private GraphNode? right;
+        private List<Tuple<int, int, string>> path;
 
         public GraphNode()
         {

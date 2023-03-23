@@ -14,15 +14,19 @@ using stima2;
 namespace Stima2
 {
     public class DFS
-    {   
-        // attribute
-        public Stack<GraphNode> check;
-        public List<GraphNode> exploredNode;
-        public List<char> move;
-        public Graph theGraph;
-        public List<Tuple<int, int, string>> DFSPath;
-        public List<GraphNode> pileOfTreasure;
-        public int countSteps;
+    {
+
+        //attribute
+        private Stack<GraphNode> check;
+        private List<GraphNode> exploredNode;
+        private List<char> move;
+        private Graph theGraph;
+        private List<Tuple<int, int, string>> DFSPath;
+        private List<GraphNode> pileOfTreasure;
+        private int countSteps;
+        private List<Tuple<int, int, string>> returnPath;
+        private List<char> backMove;
+        private int countBackSteps;
 
         // ctor
         public DFS()
@@ -32,9 +36,13 @@ namespace Stima2
             this.theGraph = new Graph();
             this.exploredNode = new List<GraphNode>();
             this.DFSPath = new List<Tuple<int, int, string>>();
-            this.pileOfTreasure= new List<GraphNode>();
+            this.pileOfTreasure = new List<GraphNode>();
             this.countSteps = 0;
-         }
+            this.returnPath = new List<Tuple<int, int, string>>();
+            this.backMove = new List<char>();
+            this.countBackSteps = 0;
+
+        }
 
         // user - defined ctor
         public DFS(Graph theGraph)
@@ -42,10 +50,13 @@ namespace Stima2
             this.theGraph = theGraph;
             this.check = new Stack<GraphNode>();
             this.move = new List<char>();
-            this.exploredNode= new List<GraphNode>();
-            this.pileOfTreasure= new List<GraphNode>();
+            this.exploredNode = new List<GraphNode>();
+            this.pileOfTreasure = new List<GraphNode>();
             this.DFSPath = new List<Tuple<int, int, string>>();
             this.countSteps = 0;
+            this.returnPath = new List<Tuple<int, int, string>>();
+            this.backMove = new List<char>();
+            this.countBackSteps= 0; 
         }
 
         // getter
@@ -54,12 +65,17 @@ namespace Stima2
             return this.move;
         }
 
+        public List<char> getBackMove()
+        {
+            return this.backMove;
+        }
+
         // cek sebuah node ada di list atau tidak
         public bool isNodeInList(GraphNode x)
         {
-            foreach(GraphNode node in this.exploredNode) 
+            foreach (GraphNode node in this.exploredNode)
             {
-                if(x.getX() == node.getX() && x.getY() == node.getY())
+                if (x.getX() == node.getX() && x.getY() == node.getY())
                 {
                     return true;
                 }
@@ -70,9 +86,9 @@ namespace Stima2
         // cari titik start untuk di Push ke stack dan ditambah ke explored node
         public void findStart()
         {
-            foreach(KeyValuePair<int, GraphNode> node in this.theGraph.nodes)
+            foreach (KeyValuePair<int, GraphNode> node in this.theGraph.nodes)
             {
-                if(node.Value.isStart())
+                if (node.Value.isStart())
                 {
                     this.check.Push(node.Value);
                     this.exploredNode.Add(node.Value);
@@ -84,41 +100,16 @@ namespace Stima2
 
         public void printDFSPath()
         {
-            foreach(Tuple<int, int, string> path in this.DFSPath) 
+            foreach (Tuple<int, int, string> path in this.DFSPath)
             {
-                Console.WriteLine("{0}", path.Item3);
+                Console.Write(path.Item3 + " ");
             }
-        }
-
-        public bool isPathInDFSPath(Tuple<int, int, string> x)
-        {
-
-            foreach (Tuple<int, int, string> paths in this.DFSPath)
-            {
-                if (x.Item1 == paths.Item1 && x.Item2 == paths.Item2)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public bool NodeInTRS(GraphNode n)
-        {
-            foreach(GraphNode x in this.pileOfTreasure)
-            {
-                if(x.getY() == n.getY() && x.getX() == n.getX())
-                {
-                    return true;
-                }
-           
-            }
-            return false;
+            Console.WriteLine();
         }
 
         public void printStack()
         {
-            foreach(GraphNode n in this.check)
+            foreach (GraphNode n in this.check)
             {
                 Console.Write(n.getName() + " ");
             }
@@ -127,7 +118,7 @@ namespace Stima2
 
         public void printExplored()
         {
-            foreach(GraphNode n in this.exploredNode)
+            foreach (GraphNode n in this.exploredNode)
             {
                 Console.Write(n.getName() + " ");
             }
@@ -136,7 +127,7 @@ namespace Stima2
 
         public void printMove()
         {
-            foreach(char m in this.getMove())
+            foreach (char m in this.getMove())
             {
                 Console.Write(m + " ");
             }
@@ -148,6 +139,34 @@ namespace Stima2
             return this.countSteps;
         }
 
+        public int getCountBackSteps()
+        {
+            return this.countBackSteps;
+        }
+
+        public List<Tuple<int, int, string>> getReturnPath()
+        {
+            return this.returnPath;
+        }
+
+        public void printReturnPath()
+        {
+            foreach(Tuple<int, int, string> p in this.returnPath)
+            {
+                Console.Write(p.Item3 + " ");
+            }
+            Console.WriteLine();
+        }
+
+        public void printBackMove()
+        {
+            foreach(char c in this.backMove)
+            {
+                Console.Write(c + " ");
+            }
+            Console.WriteLine();
+        }
+
         // algoritma DFS utama 
         public void runDFS()
         {
@@ -157,28 +176,42 @@ namespace Stima2
             this.findStart();
             int trs = this.theGraph.getNumOfTreasure();
             string dir = "LDUR";
-            
+            GraphNode curr;
+
+            // mencari seluruh treasure dalam map
             while (this.theGraph.getNumOfTreasure() > 0) // selama treasure belum habis di map
             {
 
                 // curr adalah GraphNode yang sedang diperiksa
-                GraphNode curr = check.Pop();
+                curr = check.Pop();
 
-                if(curr.isTreasure()) // menemukan treasure
-                {   
-                    this.theGraph.setNumOfTreasures(this.theGraph.getNumOfTreasure()-1); // kurangi jumlah treasure di map
+                if (curr.isTreasure()) // menemukan treasure
+                {
+                    this.theGraph.setNumOfTreasures(this.theGraph.getNumOfTreasure() - 1); // kurangi jumlah treasure di map
                     this.pileOfTreasure.Add(curr); // simpan treasure dalam tumpukan treasure
                     curr.setTreasure(false); // tandai bahwa treasure telah diambil
 
                     List<Tuple<int, int, string>> g = curr.getPath();
                     g.Reverse();
-                    foreach(Tuple<int, int, string> t in g)
+
+                    if (this.pileOfTreasure.Count == 1)
                     {
-                        this.DFSPath.Add(t);
+                        for (int i = 0; i < g.Count; i++)
+                        {
+                            this.DFSPath.Add(g[i]);
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 1; i < g.Count; i++)
+                        {
+                            this.DFSPath.Add(g[i]);
+                        }
                     }
 
+
                     // hapus path dari seluruh node 
-                    foreach(KeyValuePair<int, GraphNode> kvp in this.theGraph.nodes)
+                    foreach (KeyValuePair<int, GraphNode> kvp in this.theGraph.nodes)
                     {
                         kvp.Value.clearPath();
                     }
@@ -188,15 +221,15 @@ namespace Stima2
                     this.exploredNode.Clear();
 
                 }
-               
+
 
                 // inisiasi sementara agar tidak null
                 GraphNode next = curr;
 
                 // menambahkan jalur baru yang bisa di check
-                foreach(char c in dir)
-                {   
-                    if(curr.hasNeighbor())
+                foreach (char c in dir)
+                {
+                    if (curr.hasNeighbor())
                     {
                         if (c == 'L' && curr.getLeft() != null)
                         {
@@ -218,8 +251,8 @@ namespace Stima2
                             next = curr.getRight();
                             next.connectPath(curr);
                         }
-                        
-                        if(this.isNodeInList(next))
+
+                        if (this.isNodeInList(next))
                         {
                             continue;
                         }
@@ -229,54 +262,133 @@ namespace Stima2
 
                 }
             }
+            
 
-
-            // buat jalur treasure 
-
-            //List<Tuple<int, int, string>> sementara = this.pileOfTreasure[trs - 1].getPath();
-            //sementara.Reverse();
-            //foreach (Tuple<int, int, string> p in sementara)
-            //{
-            //    this.DFSPath.Add(p);
-            //}
-
-            for(int i = 0; i < this.DFSPath.Count-1; i++)
+            // membentuk command gerak untuk pencarian jalan mencari treasure
+            for (int i = 0; i < this.DFSPath.Count - 1; i++)
             {
                 Tuple<int, int, string> p1 = this.DFSPath[i];
                 Tuple<int, int, string> p2 = this.DFSPath[i + 1];
 
-                char m = 'X';
-                if(p2.Item1 == p1.Item1 + 1 && p2.Item2 == p1.Item2)
+                char m = 'X'; // m = 'X' berarti ada kesalahan
+                if (p2.Item1 == p1.Item1 + 1 && p2.Item2 == p1.Item2)
                 {
                     m = 'D';
                 }
-                else if(p2.Item1 == p1.Item1-1 && p2.Item2 == p1.Item2)
+                else if (p2.Item1 == p1.Item1 - 1 && p2.Item2 == p1.Item2)
                 {
                     m = 'U';
                 }
-                else if(p2.Item1 == p1.Item1 && p2.Item2 == p1.Item2+1)
+                else if (p2.Item1 == p1.Item1 && p2.Item2 == p1.Item2 + 1)
                 {
                     m = 'R';
                 }
-                else if(p2.Item1 == p1.Item1 && p2.Item2 == p1.Item2-1)
+                else if (p2.Item1 == p1.Item1 && p2.Item2 == p1.Item2 - 1)
                 {
                     m = 'L';
-                }
-                else if(p2.Item1 == p1.Item1 && p2.Item2 == p1.Item2)
-                {
-                    m = 'T';
                 }
 
                 this.move.Add(m);
             }
-            this.move.Add('T');
 
-            foreach(char c in this.move)
+            this.countSteps = this.getMove().Count;
+
+            // bersihkan lagi stack dan exploredNode untuk persiapan mencari jalan kembali
+            this.check.Clear();
+            this.exploredNode.Clear();
+
+            // tambahkan node terakhir yang dikunjungi ke stack 
+            // node yang terakhir dikunjungi pasti adalah node treasure terakhir
+            this.check.Push(pileOfTreasure[trs- 1]);
+
+            // bersihkan path dari seluruh node
+            foreach (KeyValuePair<int, GraphNode> kvp in this.theGraph.nodes)
             {
-                if(c != 'T'){
-                    this.countSteps++;
-                }
+                kvp.Value.clearPath();
             }
+
+            // menyelesaikan problem bonus : mencari jalan pulang (TSP)
+            while (this.check.Count > 0) 
+            {
+                curr = check.Pop();
+
+                if(curr.isStart())
+                {
+                    this.returnPath = curr.getPath();
+                    this.returnPath.Reverse();
+                    break;
+                }
+
+                GraphNode next = curr;
+
+                // menambahkan jalur baru yang bisa di check
+                foreach (char c in dir)
+                {
+                    if (curr.hasNeighbor())
+                    {
+                        if (c == 'L' && curr.getLeft() != null)
+                        {
+                            next = curr.getLeft();
+                            next.connectPath(curr);
+                        }
+                        else if (c == 'D' && curr.getDown() != null)
+                        {
+                            next = curr.getDown();
+                            next.connectPath(curr);
+                        }
+                        else if (c == 'U' && curr.getUp() != null)
+                        {
+                            next = curr.getUp();
+                            next.connectPath(curr);
+                        }
+                        else if (c == 'R' && curr.getRight() != null)
+                        {
+                            next = curr.getRight();
+                            next.connectPath(curr);
+                        }
+
+                        if (this.isNodeInList(next))
+                        {
+                            continue;
+                        }
+                        this.exploredNode.Add(next);
+                        this.check.Push(next);
+                    }
+
+                }
+
+            }
+
+            // membentuk command gerak untuk pencarian jalan kembali 
+            for (int i = 0; i < this.returnPath.Count - 1; i++)
+            {
+                Tuple<int, int, string> p1 = this.returnPath[i];
+                Tuple<int, int, string> p2 = this.returnPath[i + 1];
+
+                char m = 'X'; // m = 'X' berarti ada kesalahan
+                if (p2.Item1 == p1.Item1 + 1 && p2.Item2 == p1.Item2)
+                {
+                    m = 'D';
+                }
+                else if (p2.Item1 == p1.Item1 - 1 && p2.Item2 == p1.Item2)
+                {
+                    m = 'U';
+                }
+                else if (p2.Item1 == p1.Item1 && p2.Item2 == p1.Item2 + 1)
+                {
+                    m = 'R';
+                }
+                else if (p2.Item1 == p1.Item1 && p2.Item2 == p1.Item2 - 1)
+                {
+                    m = 'L';
+                }
+
+                this.backMove.Add(m);
+            }
+            this.countBackSteps = this.getBackMove().Count;
+
+
+
         }
 
         public static void Main(string[] args)
@@ -287,6 +399,10 @@ namespace Stima2
             test.runDFS();
             test.printDFSPath();
             test.printMove();
+            Console.WriteLine(test.getCountSteps());
+            test.printReturnPath();
+            test.printBackMove();
+            Console.WriteLine(test.getCountBackSteps());
         }
     }
 }
