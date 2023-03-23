@@ -5,7 +5,7 @@
     <img src= hhttps://drive.google.com/file/d/1gp40PUi7bw27c5cJC6frcBRiVuaiAgs5/view?usp=sharing
 </p>
 
-## Kelompok GreedBot
+## Kelompok Chashtag
 1. Ilham Akbar			    (13521068)
 2. Hobert Anthony Jonatan	(13521079)  
 3. Rizky Abdillah Rasyid    (13521109) 
