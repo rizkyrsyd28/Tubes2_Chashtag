@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -21,6 +22,7 @@ namespace Stima2
         public Graph theGraph;
         public List<Tuple<int, int, string>> DFSPath;
         public List<GraphNode> pileOfTreasure;
+        public int countSteps;
 
         // ctor
         public DFS()
@@ -31,6 +33,7 @@ namespace Stima2
             this.exploredNode = new List<GraphNode>();
             this.DFSPath = new List<Tuple<int, int, string>>();
             this.pileOfTreasure= new List<GraphNode>();
+            this.countSteps = 0;
          }
 
         // user - defined ctor
@@ -42,6 +45,7 @@ namespace Stima2
             this.exploredNode= new List<GraphNode>();
             this.pileOfTreasure= new List<GraphNode>();
             this.DFSPath = new List<Tuple<int, int, string>>();
+            this.countSteps = 0;
         }
 
         // getter
@@ -137,6 +141,11 @@ namespace Stima2
                 Console.Write(m + " ");
             }
             Console.WriteLine();
+        }
+
+        public int getCountSteps()
+        {
+            return this.countSteps;
         }
 
         // algoritma DFS utama 
@@ -261,6 +270,13 @@ namespace Stima2
                 this.move.Add(m);
             }
             this.move.Add('T');
+
+            foreach(char c in this.move)
+            {
+                if(c != 'T'){
+                    this.countSteps++;
+                }
+            }
         }
 
         public static void Main(string[] args)
