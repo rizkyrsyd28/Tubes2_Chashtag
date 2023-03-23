@@ -2,7 +2,7 @@
 ## Tugas Besar 2 IF2211 Strategi Algoritma Semester II Tahun 2022/2023 Pengaplikasian Algoritma BFS dan DFS dalam Menyelesaikan Persoalan Maze Treasure Hunt
 
 <p align="center">
-    <img src= hhttps://drive.google.com/file/d/1gp40PUi7bw27c5cJC6frcBRiVuaiAgs5/view?usp=sharing
+    <img src= https://drive.google.com/drive/u/1/folders/1ZH24BSvD4eygfdnckBJgIAzP2A9Z7K-h
 </p>
 
 ## Kelompok Chashtag
