@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 D:\Tugas Besar\Tubes2_Chashtag\src\Chashtag\Chashtag\App.xaml
 61063493277
 
-121893837955
+161217831621
 194101785492
 MainWindow.xaml;Views\MainGrid.xaml;Views\MainGrids\CanvasGrid.xaml;Views\MainGrids\ResultGrid.xaml;Views\SideGrid.xaml;Views\ViewBase.xaml;
 
-True
+False
 

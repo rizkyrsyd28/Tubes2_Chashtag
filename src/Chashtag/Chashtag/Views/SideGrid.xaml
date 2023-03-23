@@ -16,42 +16,46 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 
                 <!-- Title -->
                 <Grid Grid.Row="0">
                     <TextBlock Text="CHashtag" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" Margin="0" Foreground="AliceBlue" FontWeight="ExtraBold" FontSize="40"/>
                 </Grid>
+                <Grid Grid.Row="1">
+                    <TextBlock Text="Treasure Hunt Solver" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" Margin="0" Foreground="AliceBlue" FontWeight="Normal" FontStyle="Italic" FontSize="20"/>
+                </Grid>
                 
                 <!-- Input File -->
-                <Grid Grid.Row="1" HorizontalAlignment="Center">
+                <Grid Grid.Row="2" HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
                     <!-- Button Input -->
                     <Grid Grid.Column="0">
-                        <Button x:Name="input_file" Content="Input File" Height="40" Width="90" FontSize="15" Margin="25 5 5 5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="AliceBlue"/>
+                        <Button x:Name="input_file" Content="Input File" Command="{Binding OpenFileCommand}" Height="40" Width="90" FontSize="15" Margin="25 5 5 5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="AliceBlue"/>
                     </Grid>
                     <!-- Text File -->
                     <Grid Grid.Column="1">
-                        <TextBlock x:Name="file_name" Foreground="AliceBlue" Text="FILEEEEEEEEEEE"  FontSize="19" VerticalAlignment="Center" Margin="5 5 15 5" Height="30" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock x:Name="file_name" Foreground="AliceBlue" Text="{Binding FileName}"  FontSize="19" VerticalAlignment="Center" Margin="5 5 15 5" Height="30" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/>
                         <!--<TextBlock x:Name="FileName" Text="{Binding FileName}"  FontSize="19" VerticalAlignment="Center" Margin="5 5 15 5" Height="30" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/>-->
                     </Grid>
                 </Grid>
 
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="3">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Margin="0 0 0 0 " x:Name="label_algoritma" Text="Algoritma" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="SemiBold"/>
                     <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center">
-                        <RadioButton x:Name="bfs" Content="BFS" Foreground="AliceBlue" FontSize="20" Margin="0 10 0 10"/>
-                        <RadioButton x:Name="dfs" Content="DFS" Foreground="AliceBlue" FontSize="20" Margin="0 0 0 10"/>
+                        <RadioButton x:Name="bfs" Content="BFS" Foreground="AliceBlue" FontSize="20" Margin="0 10 0 10" IsChecked="{Binding isBFS}"/>
+                        <RadioButton x:Name="dfs" Content="DFS" Foreground="AliceBlue" FontSize="20" Margin="0 0 0 10" IsChecked="{Binding isDFS}"/>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="3" HorizontalAlignment="Center">
+                <Grid Grid.Row="4" HorizontalAlignment="Center">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -62,14 +66,14 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Slider Grid.Column="0" x:Name="mySliders" Minimum="0" Maximum="100" Value="1" Width="180" Height="30" TickFrequency="1" TickPlacement="None" VerticalAlignment="Center" />
-                        <TextBlock Grid.Column="1" Foreground="AliceBlue" Text="{Binding Value, ElementName=mySliders, StringFormat={}{0:0}}" VerticalAlignment="Top" FontSize="15"/>
+                        <Slider Grid.Column="0" x:Name="time_sliders" Minimum="0" Maximum="100" Value="{Binding Time}" Width="180" Height="30" TickFrequency="1" TickPlacement="None" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="1" Foreground="AliceBlue" Text="{Binding Value, ElementName=time_sliders, StringFormat={}{0:0}}" VerticalAlignment="Top" FontSize="15"/>
                     </Grid>
                 </Grid>
-                <Grid Grid.Row="4">
-                    <Button x:Name="start_file" Content="Find Treasure !" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Background="AliceBlue" FontSize="15" Width="120"/>
-                </Grid>
                 <Grid Grid.Row="5">
+                    <Button x:Name="start_file" Command="{Binding StartProcess}" Content="Find Treasure !" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Background="AliceBlue" FontSize="15" Width="120"/>
+                </Grid>
+                <Grid Grid.Row="6">
                     <Button x:Name="visual" Content="Visualize" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Background="AliceBlue" FontSize="15" Width="100"/>
                 </Grid>
             </Grid>
