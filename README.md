@@ -13,7 +13,7 @@
 ## Struktur Direktori
 |---  `src` => berisi *source code* dari program C#<br>
 |---  `test` => berisi input file txt untuk maze<br>
-|---  `bin` => berisi executable code / hasil build dari program C#
+|---  `bin` => berisi executable code / hasil build dari program C#<br>
 |---  `doc` => berisi file laporan<br>
 
 ## Implementasi Algoritma BFS dan DFS dalam Menyelesaikan Persoalan Maze Treasure Hunt
