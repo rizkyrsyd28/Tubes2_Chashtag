@@ -2,7 +2,7 @@
 ## Tugas Besar 2 IF2211 Strategi Algoritma Semester II Tahun 2022/2023 Pengaplikasian Algoritma BFS dan DFS dalam Menyelesaikan Persoalan Maze Treasure Hunt
 
 <p align="center">
-    <img src= https://theloudhouse.fandom.com/wiki/User_blog:007Jamesdean/Mustard_O'_Mine_(Done_My_Way)?file=Massive_Mustard_Pocket.png
+    <img src= https://github.com/rizkyrsyd28/Tubes2_Chashtag/blob/main/image.png
 </p>
 
 ## Kelompok Chashtag
