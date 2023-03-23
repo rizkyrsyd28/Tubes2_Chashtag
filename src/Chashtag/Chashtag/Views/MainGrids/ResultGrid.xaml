@@ -19,13 +19,13 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" x:Name="route_title" Text="Route : " Foreground="AliceBlue" FontSize="19" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"/>
-                    <TextBlock Grid.Column="1" x:Name="route_value" Text="{Binding Route}" Foreground="AliceBlue" FontSize="19" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"/>
+                    <TextBlock Grid.Column="1" x:Name="route_value" Text="{Binding Route}" Foreground="AliceBlue" FontSize="19" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" TextWrapping="WrapWithOverflow"/>
                 </Grid>
                 <Grid Grid.Row="1" HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0" Margin="10 20 10 20">
                         <Grid.ColumnDefinitions>
@@ -49,6 +49,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" x:Name="time_exe_title" Text="Time Executon : " Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="19"/>
+                        <TextBlock Grid.Column="1" x:Name="time_exe_value" Text="{Binding TimeExe}" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="19"/>
                     </Grid>
                     <!--<TextBlock Grid.Column="0" x:Name="node" Text="Node : 10" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="19" Margin="10 10 10 10"/>
                     <TextBlock Grid.Column="1" x:Name="step" Text="Step : 10" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="19" Margin="10 10 10 10"/>

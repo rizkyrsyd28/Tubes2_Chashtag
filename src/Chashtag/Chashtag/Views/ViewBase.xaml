@@ -11,7 +11,7 @@
             <ColumnDefinition Width="2.5*"/>
             <ColumnDefinition Width="7.5*"/>
         </Grid.ColumnDefinitions>
-        <local:SideGrid Grid.Column="0" />
-        <local:MainGrid Grid.Column="1" />
+        <local:SideGrid x:Name="SideGrid" Grid.Column="0" />
+        <local:MainGrid x:Name="MainGrid" Grid.Column="1" />
     </Grid>
 </UserControl>

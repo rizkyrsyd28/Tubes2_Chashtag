@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Chashtag.Views;
+using Chashtag.Views.MainGrids;
+using Stima2;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -54,16 +58,16 @@ namespace Chashtag.ViewModels
             }
         }
 
-        private double? _time;
-        public double Time
+        private int? _time;
+        public int Time
         {
             get
             {
                 if ( _time == null)
                 {
-                    _time = double.MinValue;
+                    _time = int.MinValue;
                 }
-                return (double) _time; 
+                return (int) _time; 
             }
             set
             {
@@ -113,6 +117,17 @@ namespace Chashtag.ViewModels
                 OnPropertyChanged(nameof(_bfs));
             }
         }
+        private DFS _dfs;
+        public DFS DFS
+        {
+            get { return _dfs; }
+            set
+            {
+                _dfs = value;
+                OnPropertyChanged(nameof(_dfs));
+            }
+        }
+
 
         private Canvas _canvas;
         public Canvas Canvas
@@ -157,20 +172,92 @@ namespace Chashtag.ViewModels
             
         }
 
+        private string _route;
+        public string Route
+        {
+            get
+            {
+                return _route;
+            }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    _route = value;
+                    OnPropertyChanged(nameof(Route));
+                }
+            }
+        }
+
+        private int _node;
+        public int Node
+        {
+            get
+            {
+                return _node;
+            }
+            set
+            {
+                if (_node != value)
+                {
+                    _node = value;
+                    OnPropertyChanged(nameof(Node));
+                }
+            }
+        }
+
+        private int _step;
+        public int Step
+        {
+            get
+            {
+                return _step;
+            }
+            set
+            {
+                if ( value != _step)
+                {
+                    _step = value;
+                    OnPropertyChanged(nameof(Step));
+                }
+            }
+        }
+
+        private string _timeexe;
+        public string TimeExe
+        {
+            get
+            {
+                return _timeexe;
+            }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    _timeexe = value;
+                    OnPropertyChanged(nameof(TimeExe));
+                }
+            }
+        }
+        public bool isRun;
+        public List<string> _goroute;
+        public List<string> _backroute;
+
         public Dictionary<string,Button> GridButtons;
 
         public ICommand OpenFileCommand { get; }
         public ICommand StartProcess { get; }
+        public ICommand Visualization { get; }
 
-        public MainViewModel()
+        public MainViewModel(MainWindow mainwin)
         {
-            //FileName = null;
-            Canvas = (Canvas)Application.Current.MainWindow.FindName("labirin");
-            Border = (Border)Application.Current.MainWindow.FindName("border");
+            var canvasGrid = mainwin.viewbase.MainGrid.CanvasGrid;
+            Border = (Border)canvasGrid.FindName("border");
+            Canvas = (Canvas)canvasGrid.FindName("labirin");
             GridButtons = new Dictionary<string,Button>();  
             OpenFileCommand = new OpenFileCommand(this);
             StartProcess = new StartProcess(this);
-
+            Visualization = new Visualization(this);
         }
     }
 }

@@ -1,20 +1,20 @@
 ﻿Chashtag
-
+1.0.0.0
 
 winexe
 C#
 .cs
-D:\Tugas Besar\Tubes2_Chashtag\src\Chashtag\Chashtag\obj\Debug\net6.0-windows\
+d:\Tugas Besar\Tubes2_Chashtag\src\Chashtag\Chashtag\obj\Debug\net6.0-windows\
 Chashtag
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-D:\Tugas Besar\Tubes2_Chashtag\src\Chashtag\Chashtag\App.xaml
+d:\Tugas Besar\Tubes2_Chashtag\src\Chashtag\Chashtag\App.xaml
 61063493277
 
-14-884228757
+18869564604
 194101785492
 MainWindow.xaml;Views\MainGrid.xaml;Views\MainGrids\CanvasGrid.xaml;Views\MainGrids\ResultGrid.xaml;Views\SideGrid.xaml;Views\ViewBase.xaml;
 
-False
+True
 

@@ -11,7 +11,7 @@
             <RowDefinition Height="7*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <maingrid:CanvasGrid Grid.Row="0"/>
-        <maingrid:ResultGrid Grid.Row="1"/>
+        <maingrid:CanvasGrid x:Name="CanvasGrid" Grid.Row="0"/>
+        <maingrid:ResultGrid x:Name="ResultGrid" Grid.Row="1"/>
     </Grid>
 </UserControl>

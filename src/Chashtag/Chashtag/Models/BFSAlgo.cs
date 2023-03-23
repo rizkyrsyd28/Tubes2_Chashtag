@@ -70,9 +70,9 @@ namespace TreasureHunt{
         {
             return this.sizeY;
         }
-        public double getTimeExe()
+        public string getStringTimeExe()
         {
-            return this.TimeExe;
+            return this.TimeExe.ToString("F4") + " microsecond";
         }
         public List<string> getGoPath()
         {
@@ -97,6 +97,14 @@ namespace TreasureHunt{
                 }
             }
             return route;
+        }
+        public int getCountStep()
+        {
+            return this.GoPath.Count;
+        }
+        public int getCountNode()
+        {
+            return this.walkable;
         }
 
         public void initialize()
