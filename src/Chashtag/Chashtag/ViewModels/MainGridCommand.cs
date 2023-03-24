@@ -149,6 +149,7 @@ namespace Chashtag.ViewModels
                 }
             }
             viewModel.Canvas.Margin = new Thickness((viewModel.Border.ActualWidth / 2 - (i * sizeKotak) / 2), (viewModel.Border.ActualHeight / 2 - (j * sizeKotak) / 2), 10, 10);
+            viewModel.isVisual = false;
         }
     }
     class Visualization : ICommand
@@ -168,29 +169,48 @@ namespace Chashtag.ViewModels
         }
         public async void Execute(object parameter)
         {
-            SolidColorBrush red = new SolidColorBrush(Colors.Red);
-            SolidColorBrush yellow = new SolidColorBrush(Colors.Yellow); 
-            SolidColorBrush green = new SolidColorBrush(Colors.Green);
-
-            int delay = 1000* viewModel.Time/100;
-
-            for (int i = viewModel._goroute.Count - 1; i >= 0; i--)
+            try
             {
-                Button btn = viewModel.GridButtons[viewModel._goroute[i]];
-                btn.Background = red;
-                if (btn.Content != null && btn.Content == "Treasure")
-                    btn.Content = "Taken";
-                await Task.Delay(delay);
-                btn.Background = green;
-            }
-            for (int i = 0; i < viewModel._backroute.Count; i++)
-            {
-                Button btn = viewModel.GridButtons[viewModel._backroute[i]];
-                btn.Background = yellow;
-                await Task.Delay(delay);
-                if (i != viewModel._backroute.Count-1)
+                if (!viewModel.isRun)
+                {
+                    throw new Exception("Algoritma Belum dijalankan, tekan tombol \"Find Treasure !\"");
+                }
+                if (viewModel.isVisual)
+                {
+                    throw new Exception("visualisasi telah dijalankan, tekan tombol \"Find Treasure !\" untuk refresh peta");
+                }
+                SolidColorBrush red = new SolidColorBrush(Colors.Red);
+                SolidColorBrush yellow = new SolidColorBrush(Colors.Yellow);
+                SolidColorBrush green = new SolidColorBrush(Colors.Green);
+
+                int delay = 1000 * viewModel.Time / 100;
+
+                for (int i = viewModel._goroute.Count - 1; i >= 0; i--)
+                {
+                    Button btn = viewModel.GridButtons[viewModel._goroute[i]];
+                    btn.Background = red;
+                    if (btn.Content != null && btn.Content == "Treasure")
+                        btn.Content = "Taken";
+                    await Task.Delay(delay);
                     btn.Background = green;
+                }
+                if (viewModel.isTSP)
+                {
+                    for (int i = 0; i < viewModel._backroute.Count; i++)
+                    {
+                        Button btn = viewModel.GridButtons[viewModel._backroute[i]];
+                        btn.Background = yellow;
+                        await Task.Delay(delay);
+                        if (i != viewModel._backroute.Count - 1)
+                            btn.Background = green;
 
+                    }
+                }
+                viewModel.isVisual = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Run Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

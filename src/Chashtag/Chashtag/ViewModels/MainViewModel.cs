@@ -107,6 +107,17 @@ namespace Chashtag.ViewModels
             }
         }
 
+        private bool is_tsp;
+        public bool isTSP
+        {
+            get { return is_tsp; }
+            set
+            {
+                is_tsp = value;
+                OnPropertyChanged(nameof(isTSP));
+            }
+        }
+
         private BFS _bfs;
         public BFS BFS
         {
@@ -240,6 +251,7 @@ namespace Chashtag.ViewModels
             }
         }
         public bool isRun;
+        public bool isVisual;
         public List<string> _goroute;
         public List<string> _backroute;
 
@@ -251,6 +263,8 @@ namespace Chashtag.ViewModels
 
         public MainViewModel(MainWindow mainwin)
         {
+            isRun = false;
+            isVisual = false;
             var canvasGrid = mainwin.viewbase.MainGrid.CanvasGrid;
             Border = (Border)canvasGrid.FindName("border");
             Canvas = (Canvas)canvasGrid.FindName("labirin");
