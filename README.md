@@ -6,9 +6,11 @@
 </p>
 
 ## Kelompok Chashtag
-1. Ilham Akbar			    (13521068)
-2. Hobert Anthony Jonatan	(13521079)  
-3. Rizky Abdillah Rasyid    (13521109) 
+| Nama                      | NIM      |
+|---------------------------|----------|
+| Ilham Akbar               | 13521068 |
+| Hobert Anthony Jonatan    | 13521079 |
+| Rizky Abdillah Rasyid     | 13521109 |
 
 ## Struktur Direktori
 |---  `src` => berisi *source code* dari program C#<br>
