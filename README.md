@@ -26,10 +26,66 @@ Program ini memiliki GUI sederhana dengan beberapa fitur, yaitu:
 4. Tombol "Search" untuk mengeksekusi pencarian rute solusi dengan algoritma yang dipilih, kemudian menampilkan rute solusi pada visualisasi maze treasure hunt.
 
 ## Struktur Program
-|---  `src` => berisi *source code* dari program C#<br>
-|---  `test` => berisi input file txt untuk maze<br>
-|---  `bin` => berisi executable code / hasil build dari program C#<br>
-|---  `doc` => berisi file laporan<br>
+    .
+    │   image.png
+    │   README.md
+    │
+    ├───.vs
+    ├───bin
+    │   └───Release
+    │       └───net6.0-windows
+    │               Chashtag.exe
+    │
+    ├───doc
+    ├───src
+    │   └───Chashtag
+    │       │   Chashtag.sln
+    │       │
+    │       └───Chashtag
+    │           │   App.xaml
+    │           │   App.xaml.cs
+    │           │   AssemblyInfo.cs
+    │           │   Chashtag - Backup.csproj
+    │           │   Chashtag.csproj
+    │           │   Chashtag.csproj.user
+    │           │   MainWindow.xaml
+    │           │   MainWindow.xaml.cs
+    │           │   
+    │           ├───Models
+    │           │       BFSAlgo.cs
+    │           │       BFSNode.cs
+    │           │       DFSAlgo.cs
+    │           │       DFSGraph.cs
+    │           │
+    │           ├───Resource
+    │           │       CHashtag.ico
+    │           │
+    │           ├───ViewModels
+    │           │       MainGridCommand.cs
+    │           │       MainViewModel.cs
+    │           │       SideGridCommand.cs
+    │           │       ViewModelBase.cs
+    │           │
+    │           └───Views
+    │               │   MainGrid.xaml
+    │               │   MainGrid.xaml.cs
+    │               │   SideGrid.xaml
+    │               │   SideGrid.xaml.cs
+    │               │   ViewBase.xaml
+    │               │   ViewBase.xaml.cs
+    │               │
+    │               └───MainGrids
+    │                       CanvasGrid.xaml
+    │                       CanvasGrid.xaml.cs
+    │                       ResultGrid.xaml
+    │                       ResultGrid.xaml.cs
+    │
+    └───test
+            sampel-1.txt
+            sampel-2.txt
+            sampel-3.txt
+            sampel-4.txt
+            sampel-5.txt
 
 ## Requirement Program
 1. Sistem Operasi Windows
