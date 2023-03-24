@@ -37,6 +37,7 @@ Program ini memiliki GUI sederhana dengan beberapa fitur, yaitu:
     │               Chashtag.exe
     │
     ├───doc
+    │       Tubes2_K2_13521068_CHashtag.pdf
     ├───src
     │   └───Chashtag
     │       │   Chashtag.sln
@@ -124,3 +125,4 @@ Program ini memiliki GUI sederhana dengan beberapa fitur, yaitu:
 | Rizky Abdillah Rasyid     | 13521109 |
 
 ## Link Demo Program
+https://youtu.be/oWim0CspdV0
