@@ -44,9 +44,18 @@ namespace Chashtag.ViewModels
                         viewModel.BFS = new TreasureHunt.BFS(viewModel.FilePath);
                         CreateGrid(viewModel);
                         viewModel.BFS.driver();
-                        viewModel.Route = viewModel.BFS.getStringRoute();
+                        if (!viewModel.isTSP)
+                        {
+                            viewModel.Route = viewModel.BFS.getStringRoute();
+                            viewModel.Step = viewModel.BFS.getCountStep();
+
+                        }
+                        else
+                        {
+                            viewModel.Route = viewModel.BFS.getStringBackRoute();
+                            viewModel.Step = viewModel.BFS.getCountBackStep();
+                        }
                         viewModel.Node = viewModel.BFS.getCountNode();
-                        viewModel.Step = viewModel.BFS.getCountStep();
                         viewModel.TimeExe = viewModel.BFS.getStringTimeExe();
                         viewModel._goroute = viewModel.BFS.getGoPath();
                         viewModel._backroute = viewModel.BFS.getBackPath();
@@ -61,9 +70,18 @@ namespace Chashtag.ViewModels
                         stopwatch.Stop();
                         CreateGrid(viewModel);
                         double _timeexe = (double)stopwatch.ElapsedTicks * 10 / Stopwatch.Frequency;
-                        viewModel.Route = viewModel.DFS.getStringRoute();
+                        if (!viewModel.isTSP)
+                        {
+                            viewModel.Route = viewModel.DFS.getStringRoute();
+                            viewModel.Step = viewModel.DFS.getCountSteps();
+
+                        }
+                        else
+                        {
+                            viewModel.Route = viewModel.DFS.getStringBackRoute();
+                            viewModel.Step = viewModel.DFS.getCountBackSteps();
+                        }
                         viewModel.Node = viewModel.DFS.getCountNode();
-                        viewModel.Step = viewModel.DFS.getCountSteps();
                         viewModel.TimeExe = _timeexe.ToString("F4") + " microsecond";
                         viewModel._goroute = viewModel.DFS.getGoPath();
                         viewModel._backroute = viewModel.DFS.getBackPath();
@@ -122,26 +140,29 @@ namespace Chashtag.ViewModels
                     kotak.Content = _name;
                     kotak.Width = sizeKotak;
                     kotak.Height = sizeKotak;
-                    SolidColorBrush warna = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                    SolidColorBrush warna = new SolidColorBrush(Colors.AliceBlue);
                     if (maze[j, i] == 'K')
                     {
-                        warna = new SolidColorBrush(Color.FromRgb(20, 150, 100));
+                        warna = new SolidColorBrush(Colors.Gold);
+                        kotak.Foreground = new SolidColorBrush(Color.FromRgb(10, 10, 10));
                     }
                     else if (maze[j, i] == 'X')
                     {
-                        warna = new SolidColorBrush(Color.FromRgb(60, 0, 200));
+                        warna = new SolidColorBrush(Colors.Black);
+                        kotak.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
                     }
                     else if (maze[j, i] == 'R')
                     {
-                        warna = new SolidColorBrush(Color.FromRgb(60, 100, 200));
+                        warna = new SolidColorBrush(Colors.Gray);
+                        kotak.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
                     }
                     else if (maze[j, i] == 'T')
                     {
-                        //kotak.Content = "Treasure";
-                        warna = new SolidColorBrush(Color.FromRgb(10, 100, 20));
+                        kotak.Content = "Treasure";
+                        warna = new SolidColorBrush(Colors.DarkCyan);
+                        kotak.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
                     }
                     kotak.Background = warna;
-                    kotak.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
                     kotak.Margin = new Thickness(i * sizeKotak, j * sizeKotak, 0, 0);
                     viewModel.GridButtons.Add(_name, kotak);
@@ -179,34 +200,53 @@ namespace Chashtag.ViewModels
                 {
                     throw new Exception("visualisasi telah dijalankan, tekan tombol \"Find Treasure !\" untuk refresh peta");
                 }
-                SolidColorBrush red = new SolidColorBrush(Colors.Red);
+                viewModel.isVisual = true;
+                SolidColorBrush blue = new SolidColorBrush(Colors.MediumBlue);
                 SolidColorBrush yellow = new SolidColorBrush(Colors.Yellow);
                 SolidColorBrush green = new SolidColorBrush(Colors.Green);
+                SolidColorBrush white = new SolidColorBrush(Colors.AliceBlue);
 
                 int delay = 1000 * viewModel.Time / 100;
 
                 for (int i = viewModel._goroute.Count - 1; i >= 0; i--)
                 {
                     Button btn = viewModel.GridButtons[viewModel._goroute[i]];
-                    btn.Background = red;
+                    btn.Background = blue;
+                    btn.Foreground = white;
                     if (btn.Content != null && btn.Content == "Treasure")
                         btn.Content = "Taken";
                     await Task.Delay(delay);
-                    btn.Background = green;
+                    if (btn.Content == "Taken")
+                        btn.Background = green;
+                    else
+                    {
+                        btn.Background = yellow;
+                        btn.Foreground = new SolidColorBrush(Colors.Black);
+                    }
                 }
                 if (viewModel.isTSP)
                 {
                     for (int i = 0; i < viewModel._backroute.Count; i++)
                     {
                         Button btn = viewModel.GridButtons[viewModel._backroute[i]];
-                        btn.Background = yellow;
+                        btn.Background = blue;
+                        btn.Foreground = white;
                         await Task.Delay(delay);
                         if (i != viewModel._backroute.Count - 1)
-                            btn.Background = green;
-
+                        {
+                            if (btn.Content == "Taken")
+                            {
+                                btn.Background = green;
+                                btn.Foreground = white;
+                            }
+                            else
+                            {
+                                btn.Background = yellow;
+                                btn.Foreground = new SolidColorBrush(Colors.Black);
+                            }
+                        }
                     }
                 }
-                viewModel.isVisual = true;
             }
             catch (Exception ex)
             {

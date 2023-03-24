@@ -13,6 +13,7 @@ namespace TreasureHunt{
         private Tuple<int, int> coor;
         private bool visited;
         private List<Tuple<int, int, string>> path;
+        private List<string> orient;
         private Tuple<int, int> U;
         private Tuple<int, int> S;
         private Tuple<int, int> T;
@@ -23,6 +24,7 @@ namespace TreasureHunt{
             this.name = _name;
             this.coor = new Tuple<int, int>(0, 0);
             this.visited = false;
+            this.orient = new List<string>();
             this.path = new List<Tuple<int, int, string>>();
             this.path.Add(new Tuple<int, int, string>(0, 0, _name));
             this.U = null;
@@ -35,6 +37,7 @@ namespace TreasureHunt{
             this.name = n.getName();
             this.coor = new Tuple<int, int>(n.getCoor().Item1, n.getCoor().Item2);
             this.visited = false;
+            this.orient = n.getOrient();
             this.path = new List<Tuple<int, int, string>>();
             this.U = n.getUtara();
             this.S = n.getSelatan();
@@ -53,6 +56,10 @@ namespace TreasureHunt{
         public Tuple<int, int> getCoor()
         {
             return this.coor;
+        }
+        public List<string> getOrient()
+        {
+            return this.orient;
         }
         public List<Tuple<int, int, string>> getPath()
         {
@@ -128,16 +135,22 @@ namespace TreasureHunt{
             this.path.Add(l.getInfo());
             //this.path.Add(new Tuple<int, int, string>(l.getCoor().Item1, l.getCoor().Item2, l.name));
         }
-        public void connectPath(Node l)
+        public void connectPath(Node l, string orient)
         {
+            this.orient.Add(orient);
             foreach (Tuple<int, int, string> node in l.getPath())
             {
                 this.path.Add(node);
+            }
+            foreach (string node in l.getOrient())
+            {
+                this.orient.Add(node);
             }
         }
         public void clearNodePath()
         {
             this.path.Clear();
+            this.orient.Clear();
             // this.path = new List<Tuple<int, int, string>>();
             this.path.Add(new Tuple<int, int, string>(coor.Item1, coor.Item2, this.name));
         }

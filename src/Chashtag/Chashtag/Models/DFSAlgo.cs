@@ -141,7 +141,7 @@ namespace Stima2
 
         public int getCountBackSteps()
         {
-            return this.countBackSteps;
+            return this.countBackSteps + getCountSteps();
         }
 
         public List<Tuple<int, int, string>> getReturnPath()
@@ -191,20 +191,36 @@ namespace Stima2
         {
             string route = "";
 
-            for(int i = DFSPath.Count - 1; i >= 0; i--)
+            for(int i = 0; i < move.Count; i++)
             {
-                if (i == 0)
+                if (i == move.Count - 1)
                 {
-                    route = route + DFSPath[i].Item3;
+                    route = route + move[i];
                 }
                 else
                 {
-                    route = route + DFSPath[i].Item3 + "-";
+                    route = route + move[i] + " - ";
                 }
             }
             return route;
         }
+        public string getStringBackRoute()
+        {
+            string route = "";
 
+            for (int i = 0; i < backMove.Count; i++)
+            {
+                if (i == backMove.Count - 1)
+                {
+                    route = route + backMove[i];
+                }
+                else
+                {
+                    route = route + backMove[i] + " - ";
+                }
+            }
+            return getStringRoute() + " - " + route;
+        }
         public List<string> getGoPath()
         {
             List<string> goPath = new List<string>();

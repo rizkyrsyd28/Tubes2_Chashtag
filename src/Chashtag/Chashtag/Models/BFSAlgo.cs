@@ -17,6 +17,8 @@ namespace TreasureHunt{
         private Tuple<int, int> last;
         private List<string> GoPath;
         private List<string> BackPath;
+        private List<string> orientPath;
+        private List<string> orientBackPath;
         private Dictionary<Tuple<int, int>, Node> nodes;
         private Queue<Node> queue;
         private int treasure;
@@ -49,6 +51,7 @@ namespace TreasureHunt{
                         if (baris[i][j].Equals('T')) this.treasure++;
                         if (baris[i][j].Equals('T') || baris[i][j].Equals('R') || baris[i][j].Equals('K')) this.walkable++;
                         if (baris[i][j].Equals('K')) this.start = new Tuple<int, int>(j, i);
+                        if (!baris[i][j].Equals('K') && !baris[i][j].Equals('R') && !baris[i][j].Equals('T') && !baris[i][j].Equals('X')) throw new Exception("Isi file salah, terdapat karakter selain 'K', 'R', 'X', atau 'T'");
                     }
                 }
             }
@@ -56,6 +59,8 @@ namespace TreasureHunt{
             this.nodes = new Dictionary<Tuple<int, int>, Node>();
             // QUEUE
             this.queue = new Queue<Node>();
+            this.orientPath = new List<string>();
+            this.orientBackPath = new List<string>();
         }
 
         public int getSizeX()
@@ -78,6 +83,10 @@ namespace TreasureHunt{
         {
             return this.GoPath;
         }
+        public List<string> getOrientPath()
+        {
+            return this.orientPath;
+        }
         public List<string> getBackPath()
         {
             return this.BackPath;
@@ -85,26 +94,63 @@ namespace TreasureHunt{
         public string getStringRoute()
         {
             string route = "";
-            for (int i = GoPath.Count - 1; i >= 0; i--)
+            for (int i = orientPath.Count - 1; i >= 0; i--)
             {
                 if (i == 0)
                 {
-                    route = route + GoPath[i];
+                    route = route + orientPath[i];
                 }
                 else
                 {
-                    route = route + GoPath[i] + "-";
+                    route = route + orientPath[i] + " - ";
                 }
             }
             return route;
         }
+        public string getStringBackRoute()
+        {
+            string route = "";
+            for (int i = orientBackPath.Count - 1; i >= 0; i--)
+            {
+                if (i == 0)
+                {
+                    route = route + orientBackPath[i];
+                }
+                else
+                {
+                    route = route + orientBackPath[i] + " - ";
+                }
+            }
+            return getStringRoute() + " - " + route;
+        }
         public int getCountStep()
         {
-            return this.GoPath.Count;
+            return this.orientPath.Count;
         }
         public int getCountNode()
         {
             return this.walkable;
+        }
+        public int getCountBackStep() 
+        {
+            return this.orientBackPath.Count + getCountStep();
+        }
+
+        public void setOrientPath(List<string> arr)
+        {
+            this.orientPath.Clear();
+            foreach (string s in arr)
+            {
+                this.orientPath.Add(s);
+            }
+        }
+        public void setOrientBackPath(List<string> arr)
+        {
+            this.orientBackPath.Clear();
+            foreach (string s in arr)
+            {
+                this.orientBackPath.Add(s);
+            }
         }
 
         public void initialize()
@@ -178,25 +224,25 @@ namespace TreasureHunt{
             {
                 if (curr.getUtara() != null && !nodes[curr.getUtara()].isVisited())
                 {
-                    nodes[curr.getUtara()].connectPath(curr);
+                    nodes[curr.getUtara()].connectPath(curr, "U");
                     nodes[curr.getUtara()].setVisitNode();
                     queue.Enqueue(nodes[curr.getUtara()]);
                 }
                 if (curr.getTimur() != null && !nodes[curr.getTimur()].isVisited())
                 {
-                    nodes[curr.getTimur()].connectPath(curr);
+                    nodes[curr.getTimur()].connectPath(curr, "R");
                     nodes[curr.getTimur()].setVisitNode();
                     queue.Enqueue(nodes[curr.getTimur()]);
                 }
                 if (curr.getSelatan() != null && !nodes[curr.getSelatan()].isVisited())
                 {
-                    nodes[curr.getSelatan()].connectPath(curr);
+                    nodes[curr.getSelatan()].connectPath(curr, "D");
                     nodes[curr.getSelatan()].setVisitNode();
                     queue.Enqueue(nodes[curr.getSelatan()]);
                 }
                 if (curr.getBarat() != null && !nodes[curr.getBarat()].isVisited())
                 {
-                    nodes[curr.getBarat()].connectPath(curr);
+                    nodes[curr.getBarat()].connectPath(curr, "L");
                     nodes[curr.getBarat()].setVisitNode();
                     queue.Enqueue(nodes[curr.getBarat()]);
                 }
@@ -204,6 +250,7 @@ namespace TreasureHunt{
                 curr.setVisitNode();
             }
             this.BackPath = curr.getPathString();
+            setOrientBackPath(curr.getOrient());
             this.BackPath.Reverse(0, BackPath.Count);
         }
 
@@ -217,25 +264,25 @@ namespace TreasureHunt{
             {
                 if (curr.getUtara() != null && !nodes[curr.getUtara()].isVisited())
                 {
-                    nodes[curr.getUtara()].connectPath(curr);
+                    nodes[curr.getUtara()].connectPath(curr, "U");
                     nodes[curr.getUtara()].setVisitNode();
                     queue.Enqueue(nodes[curr.getUtara()]);
                 }
                 if (curr.getTimur() != null && !nodes[curr.getTimur()].isVisited())
                 {
-                    nodes[curr.getTimur()].connectPath(curr);
+                    nodes[curr.getTimur()].connectPath(curr, "R");
                     nodes[curr.getTimur()].setVisitNode();
                     queue.Enqueue(nodes[curr.getTimur()]);
                 }
                 if (curr.getSelatan() != null && !nodes[curr.getSelatan()].isVisited())
                 {
-                    nodes[curr.getSelatan()].connectPath(curr);
+                    nodes[curr.getSelatan()].connectPath(curr, "D");
                     nodes[curr.getSelatan()].setVisitNode();
                     queue.Enqueue(nodes[curr.getSelatan()]);
                 }
                 if (curr.getBarat() != null && !nodes[curr.getBarat()].isVisited())
                 {
-                    nodes[curr.getBarat()].connectPath(curr);
+                    nodes[curr.getBarat()].connectPath(curr, "L");
                     nodes[curr.getBarat()].setVisitNode();
                     queue.Enqueue(nodes[curr.getBarat()]);
                 }
@@ -256,6 +303,7 @@ namespace TreasureHunt{
                     // Console.Write("QUEUE : ");
                     queue.Enqueue(nodes[curr.getCoor()]);
                     this.GoPath = curr.getPathString();
+                    setOrientPath(curr.getOrient());
                     this.last = curr.getCoor();
                 }
             } while (treasure != 0);

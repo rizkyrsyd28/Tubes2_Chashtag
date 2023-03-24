@@ -309,7 +309,7 @@ namespace stima2
                     }
                     else
                     {
-                        throw new Exception();
+                        throw new Exception("Isi file salah, terdapat karakter selain 'K', 'R', 'X', atau 'T'");
                     }
                     
                 }
