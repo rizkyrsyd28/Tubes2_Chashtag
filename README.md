@@ -6,9 +6,11 @@
 </p>
 
 ## Kelompok Chashtag
-1. Ilham Akbar			    (13521068)
-2. Hobert Anthony Jonatan	(13521079)  
-3. Rizky Abdillah Rasyid    (13521109) 
+| Nama                      | NIM      |
+|---------------------------|----------|
+| Ilham Akbar               | 13521068 |
+| Hobert Anthony Jonatan    | 13521079 |
+| Rizky Abdillah Rasyid     | 13521109 |
 
 ## Struktur Direktori
 |---  `src` => berisi *source code* dari program C#<br>
@@ -29,7 +31,17 @@ Program ini memiliki GUI sederhana dengan beberapa fitur, yaitu:
 
 ## Cara Menjalankan Program
 1. Pastikan semua requirement telah diinstal
-2. 
+2. Jalankan Visual Studio Code. 
+3. Buka folder src\Chastag\Chastag.
+4. Cari file MainWindow.xaml.cs lalu copy pathnya.
+5. Buka terminal pada folder src\Chastag\Chastag
+6. Jalankan program dengan cara menuliskan dotnet run “path MainWindow.xaml.cs” pada terminal.
+7. Setelah tampilan program muncul, klik input file lalu pilih file .txt dari maze.
+8. Kemudian, pilih algoritma yang ingin digunakan (BFS/DFS).
+9. Centang pada bagian TSP apabila rute solusi yang diperoleh juga harus kembali ke titik awal setelah menemukan segala harta karunnya
+10. Tekan Find Treasure ! untuk menemukan semua treasure yang ada.
+11. Tekan Visualize untuk menampilkan rute yang mengunjungi semua treasure yang ada
+
 
 
 
@@ -37,3 +49,4 @@ Program ini memiliki GUI sederhana dengan beberapa fitur, yaitu:
 1. VS Code          (https://code.visualstudio.com/Download)
 2. Visual Studio    (https://visualstudio.microsoft.com/downloads/)
 3. .NET Framework   (https://dotnet.microsoft.com/en-us/download/dotnet-framework)
+4. .NET SDK         (https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-7.0.202-windows-x64-installer?journey=vs-code)
