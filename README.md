@@ -37,3 +37,4 @@ Program ini memiliki GUI sederhana dengan beberapa fitur, yaitu:
 1. VS Code          (https://code.visualstudio.com/Download)
 2. Visual Studio    (https://visualstudio.microsoft.com/downloads/)
 3. .NET Framework   (https://dotnet.microsoft.com/en-us/download/dotnet-framework)
+4. .NET SDK         (https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-7.0.202-windows-x64-installer?journey=vs-code)
