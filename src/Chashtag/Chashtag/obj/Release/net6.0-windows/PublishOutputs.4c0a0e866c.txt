@@ -1,0 +1,5 @@
+D:\Tugas Besar\Tubes2_Chashtag\bin\Release\net6.0-windows\publish\Chashtag.exe
+D:\Tugas Besar\Tubes2_Chashtag\bin\Release\net6.0-windows\publish\Chashtag.dll
+D:\Tugas Besar\Tubes2_Chashtag\bin\Release\net6.0-windows\publish\Chashtag.deps.json
+D:\Tugas Besar\Tubes2_Chashtag\bin\Release\net6.0-windows\publish\Chashtag.runtimeconfig.json
+D:\Tugas Besar\Tubes2_Chashtag\bin\Release\net6.0-windows\publish\Chashtag.pdb
