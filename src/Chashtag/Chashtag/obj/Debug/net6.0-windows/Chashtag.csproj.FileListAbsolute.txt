@@ -30,3 +30,4 @@ D:\Tugas Besar\Tubes2_Chashtag\src\Chashtag\Chashtag\obj\Debug\net6.0-windows\Vi
 D:\Tugas Besar\Tubes2_Chashtag\src\Chashtag\Chashtag\obj\Debug\net6.0-windows\Views\MainGrids\ResultGrid.g.cs
 D:\Tugas Besar\Tubes2_Chashtag\src\Chashtag\Chashtag\obj\Debug\net6.0-windows\Views\MainGrids\CanvasGrid.baml
 D:\Tugas Besar\Tubes2_Chashtag\src\Chashtag\Chashtag\obj\Debug\net6.0-windows\Views\MainGrids\ResultGrid.baml
+D:\Tugas Besar\Tubes2_Chashtag\src\Chashtag\Chashtag\obj\Debug\net6.0-windows\Chashtag_Content.g.cs
