@@ -29,7 +29,17 @@ Program ini memiliki GUI sederhana dengan beberapa fitur, yaitu:
 
 ## Cara Menjalankan Program
 1. Pastikan semua requirement telah diinstal
-2. 
+2. Jalankan Visual Studio Code. 
+3. Buka folder src\Chastag\Chastag.
+4. Cari file MainWindow.xaml.cs lalu copy pathnya.
+5. Buka terminal pada folder src\Chastag\Chastag
+6. Jalankan program dengan cara menuliskan dotnet run “path MainWindow.xaml.cs” pada terminal.
+7. Setelah tampilan program muncul, klik input file lalu pilih file .txt dari maze.
+8. Kemudian, pilih algoritma yang ingin digunakan (BFS/DFS).
+9. Centang pada bagian TSP apabila rute solusi yang diperoleh juga harus kembali ke titik awal setelah menemukan segala harta karunnya
+10. Tekan Find Treasure ! untuk menemukan semua treasure yang ada.
+11. Tekan Visualize untuk menampilkan rute yang mengunjungi semua treasure yang ada
+
 
 
 
