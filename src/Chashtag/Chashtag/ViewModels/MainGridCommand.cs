@@ -137,12 +137,12 @@ namespace Chashtag.ViewModels
                     Button kotak = new Button();
 
                     string _name = "N" + i.ToString() + j.ToString();
-                    kotak.Content = _name;
                     kotak.Width = sizeKotak;
                     kotak.Height = sizeKotak;
                     SolidColorBrush warna = new SolidColorBrush(Colors.AliceBlue);
                     if (maze[j, i] == 'K')
                     {
+                        kotak.Content = "KrustyKrab";
                         warna = new SolidColorBrush(Colors.Gold);
                         kotak.Foreground = new SolidColorBrush(Color.FromRgb(10, 10, 10));
                     }
